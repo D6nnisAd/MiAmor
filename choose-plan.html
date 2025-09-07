@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Plan | MiAmor</title>
+
+    <!-- FAVICON LINKS -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #02040a;
+            --background-dark: #04091A;
+            --card-background: rgba(10, 25, 47, 0.6);
+            --border-color: rgba(255, 64, 129, 0.15);
+            --neon-cyan: #00f2fe;
+            --neon-blue: #2c72ff;
+            --neon-pink: #ff4081;
+            --text-light: #f0f4f8;
+            --text-muted: #a9b7d1;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            background-image: radial-gradient(circle at top left, rgba(44, 114, 255, 0.1), transparent 40%),
+                              radial-gradient(circle at bottom right, rgba(255, 64, 129, 0.08), transparent 40%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 3rem 1rem;
+            overflow-x: hidden;
+        }
+
+        .plan-container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .logo { max-width: 140px; margin-bottom: 1.5rem; transition: transform 0.3s ease; }
+        .logo:hover { transform: scale(1.05); }
+
+        h2 { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; font-weight: 700; }
+        h2 .highlight { background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
+        .plan-container > p { color: var(--text-muted); margin-bottom: 3rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        .btn { display: inline-block; padding: 14px 40px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer; position: relative; text-align: center; font-size: 1rem; z-index: 1; }
+        .btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: inherit; border-radius: 50px; filter: blur(15px); opacity: 0.7; z-index: -1; transition: opacity 0.3s ease; }
+        .btn:hover { transform: translateY(-3px) scale(1.05); }
+        .btn:hover::before { opacity: 1; }
+        .btn-primary { background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan)); color: var(--text-light); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); }
+        .btn-accent { background: linear-gradient(90deg, var(--neon-pink), #c51162); color: var(--text-light); }
+        
+        /* DESKTOP STYLES */
+        .earnings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+        .earnings-card { background: var(--card-background); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; transition: all 0.3s ease; backdrop-filter: blur(8px); text-align: left; height: 100%;}
+        .earnings-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .earnings-card.ultra { border-color: var(--neon-pink); box-shadow: 0 0 40px rgba(255, 64, 129, 0.2); }
+        .earnings-card .plan-name { font-size: 2rem; font-weight: 700; color: var(--text-light); text-align: center; margin-bottom: 2rem; }
+        .earnings-card.ultra .plan-name { color: var(--neon-pink); }
+        .earnings-card .access-fee { text-align: center; margin-bottom: 2.5rem; }
+        .access-fee .label { font-size: 1rem; color: var(--text-muted); }
+        .access-fee .price { font-size: 3rem; font-weight: 800; line-height: 1; }
+        .earnings-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+        .earning-item { background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 10px; text-align: center; }
+        .earning-item .label { font-size: 0.85rem; color: var(--text-muted); line-height: 1.2; }
+        .earning-item .value { font-size: 1.5rem; font-weight: 700; color: var(--text-light); line-height: 1.2; }
+        .earning-item .value small { font-size: 0.8rem; font-weight: 400; }
+        .deployed-features { margin-top: 1.5rem; }
+        .deployed-features h4 { text-align: center; margin-bottom: 1rem; color: var(--text-muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .deployed-features ul { list-style: none; columns: 2; gap: 0.5rem 2rem; padding: 0; }
+        .deployed-features li { margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+        .deployed-features li::before { content: '✔'; color: var(--neon-cyan); margin-right: 0.5rem; }
+        .earnings-card.ultra .deployed-features li::before { color: var(--neon-pink); }
+        .earnings-card .btn { margin-top: auto; width: 100%; }
+
+        /* CAROUSEL STYLES */
+        .plan-carousel-wrapper { display: block; }
+        .carousel-dots { display: none; } /* Hidden on desktop */
+
+        @media (max-width: 800px) {
+            body { padding-top: 2rem; padding-bottom: 2rem; }
+            .plan-container > p { margin-bottom: 2rem; }
+            
+            .plan-carousel-wrapper {
+                width: 100vw;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .earnings-grid {
+                grid-template-columns: none; /* remove grid layout */
+                display: flex;
+                gap: 1rem;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding: 0 calc(50vw - 40vw); /* Centers the card (50vw) minus half the card width (80vw / 2) */
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;  /* Firefox */
+            }
+            .earnings-grid::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, and Opera */
+            }
+
+            .earnings-card-wrapper {
+                flex: 0 0 80vw;
+                scroll-snap-align: center;
+                scroll-snap-stop: always;
+            }
+            
+            .earnings-card {
+                padding: 1.5rem;
+                box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            }
+            .earnings-card:hover {
+                transform: none; /* Disable hover effect on mobile */
+            }
+
+            /* FONT & SPACING REDUCTIONS FOR MOBILE */
+            .earnings-card .plan-name { font-size: 1.5rem; margin-bottom: 1rem; }
+            .earnings-card .access-fee { margin-bottom: 1rem; }
+            .access-fee .price { font-size: 2.2rem; }
+            .earnings-breakdown { gap: 0.5rem; margin-bottom: 1rem; }
+            .earning-item { padding: 0.6rem; }
+            .earning-item .label { font-size: 0.7rem; }
+            .earning-item .value { font-size: 1.1rem; }
+            .deployed-features { margin-top: 1rem; }
+            .deployed-features h4 { margin-bottom: 0.75rem; font-size: 0.9rem;}
+            .deployed-features ul { columns: 1; }
+            .deployed-features li { font-size: 0.8rem; margin-bottom: 0.25rem; }
+            .earnings-card .btn { padding: 12px 30px; font-size: 0.9rem; }
+
+            /* DOTS NAVIGATION */
+            .carousel-dots {
+                display: flex;
+                justify-content: center;
+                gap: 12px;
+                margin-top: 1.5rem;
+            }
+            .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: var(--border-color);
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            .dot.active {
+                background-color: var(--neon-pink);
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="plan-container">
+        <a href="index.html"><img src="assets/logo.png" alt="MiAmor Logo" class="logo"></a>
+        <h2><span class="highlight">Choose Your Plan</span></h2>
+        <p>Select a package to complete your registration and unlock your earning potential.</p>
+
+        <div class="plan-carousel-wrapper">
+            <div class="earnings-grid" id="plan-carousel-track">
+                <!-- MiAmor Plus Card -->
+                <div class="earnings-card-wrapper">
+                    <div class="earnings-card">
+                        <h3 class="plan-name">MiAmor Plus</h3>
+                        <div class="access-fee">
+                            <div class="label">Access Fee</div>
+                            <div class="price">10,000</div>
+                        </div>
+                        <div class="earnings-breakdown">
+                            <div class="earning-item"><div class="label">Onboarding Gift</div><div class="value">8,000</div></div>
+                            <div class="earning-item"><div class="label">Connection Commission</div><div class="value">9,100</div></div>
+                            <div class="earning-item"><div class="label">Matching Add-ons</div><div class="value">2,000</div></div>
+                            <div class="earning-item"><div class="label">Game Modules</div><div class="value">3,000</div></div>
+                            <div class="earning-item"><div class="label">First Level Spill</div><div class="value">200</div></div>
+                            <div class="earning-item"><div class="label">Second Level Spill</div><div class="value">100</div></div>
+                            <div class="earning-item" style="grid-column: 1 / -1;"><div class="label">TikTok/FB Share</div><div class="value">1,500 <small>/ 5k views</small></div></div>
+                        </div>
+                        <div class="deployed-features">
+                            <h4>Core Features Included</h4>
+                            <ul>
+                                <li>Incentives</li><li>Couples Challenge</li><li>Skills Lab</li><li>Love Hamper</li><li>Sell It Sector</li><li>Marathon Contest</li><li>Couples Trip</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary" data-package="plus">Choose Plus</button>
+                    </div>
+                </div>
+                <!-- MiAmor Ultra Card -->
+                <div class="earnings-card-wrapper">
+                    <div class="earnings-card ultra">
+                        <h3 class="plan-name">MiAmor Ultra</h3>
+                        <div class="access-fee">
+                            <div class="label">Access Fee</div>
+                            <div class="price">14,000</div>
+                        </div>
+                        <div class="earnings-breakdown">
+                            <div class="earning-item"><div class="label">Onboarding Gift</div><div class="value">12,500</div></div>
+                            <div class="earning-item"><div class="label">Connection Commission</div><div class="value">12,500</div></div>
+                            <div class="earning-item"><div class="label">Matching Add-ons</div><div class="value">2,500</div></div>
+                            <div class="earning-item"><div class="label">Game Modules</div><div class="value">5,000</div></div>
+                            <div class="earning-item"><div class="label">First Level Spill</div><div class="value">400</div></div>
+                            <div class="earning-item"><div class="label">Second Level Spill</div><div class="value">150</div></div>
+                            <div class="earning-item" style="grid-column: 1 / -1;"><div class="label">TikTok/FB Share</div><div class="value">2,500 <small>/ 5k views</small></div></div>
+                        </div>
+                        <div class="deployed-features">
+                            <h4>Core Features Included</h4>
+                            <ul>
+                                <li>Incentives</li><li>Couples Challenge</li><li>Skills Lab</li><li>Love Hamper</li><li>Sell It Sector</li><li>Marathon Contest</li><li>Couples Trip</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-accent" data-package="ultra">Choose Ultra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
+
+            if (!email) {
+                const container = document.querySelector('.plan-container');
+                container.innerHTML = `
+                    <h2>Invalid Session</h2>
+                    <p>We couldn't find your registration details. Please start over.</p>
+                    <a href="register.html" class="btn btn-primary">Back to Registration</a>
+                `;
+                return;
+            }
+
+            const encodedEmail = encodeURIComponent(email);
+
+            document.querySelector('button[data-package="plus"]').addEventListener('click', () => {
+                window.location.href = `payment.html?package=plus&email=${encodedEmail}`;
+            });
+
+            document.querySelector('button[data-package="ultra"]').addEventListener('click', () => {
+                window.location.href = `payment.html?package=ultra&email=${encodedEmail}`;
+            });
+
+            // --- Carousel Logic for Mobile ---
+            const track = document.getElementById('plan-carousel-track');
+            const dotsContainer = document.getElementById('carousel-dots');
+            const slides = Array.from(track.children);
+            const totalSlides = slides.length;
+            let currentIndex = 0;
+
+            if (window.innerWidth <= 800) {
+                // Create dots
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => {
+                        slides[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+                const dots = Array.from(dotsContainer.children);
+
+                // Function to update dots based on scroll
+                const updateDots = () => {
+                    const scrollLeft = track.scrollLeft;
+                    const trackWidth = track.scrollWidth - track.clientWidth;
+                    const slideWidth = track.clientWidth * 0.8; // card is 80vw
+
+                    // A more robust way to find the current index with scroll snapping
+                    let closestIndex = 0;
+                    let smallestDistance = Infinity;
+                    slides.forEach((slide, index) => {
+                        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+                        const scrollCenter = track.scrollLeft + track.clientWidth / 2;
+                        const distance = Math.abs(slideCenter - scrollCenter);
+                        if (distance < smallestDistance) {
+                            smallestDistance = distance;
+                            closestIndex = index;
+                        }
+                    });
+
+                    if (closestIndex !== currentIndex) {
+                        dots[currentIndex].classList.remove('active');
+                        dots[closestIndex].classList.add('active');
+                        currentIndex = closestIndex;
+                    }
+                };
+                
+                // Use a timeout to avoid spamming the event during scroll
+                let scrollTimeout;
+                track.addEventListener('scroll', () => {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(updateDots, 100);
+                });
+
+                // Set initial "peek-a-boo" scroll position
+                requestAnimationFrame(() => {
+                    const firstCard = slides[0];
+                    if (firstCard) {
+                        const viewportWidth = track.clientWidth;
+                        const cardWidth = firstCard.offsetWidth;
+                        const gap = parseInt(window.getComputedStyle(track).gap) || 16;
+                        // Scroll to a point between the center of the viewport and the start of the second card
+                        track.scrollLeft = (cardWidth + gap / 2) - (viewportWidth / 2);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
