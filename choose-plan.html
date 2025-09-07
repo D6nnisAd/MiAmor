@@ -104,13 +104,59 @@
         .earnings-card.ultra .quick-select-icon svg { color: var(--neon-pink); filter: drop-shadow(0 0 5px var(--neon-pink)); }
 
         @keyframes bounce-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        
+        .quick-select-btn {
+            width: 60px;
+            height: 32px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            background-color: rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            padding: 4px;
+        }
+        
+        .quick-select-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: block;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
+        }
 
-        .quick-select-btn { width: 50px; height: 30px; border-radius: 50px; border: none; cursor: pointer; transition: all 0.3s ease; position: relative; z-index: 1; }
-        .quick-select-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: inherit; border-radius: 50px; filter: blur(10px); opacity: 0.7; z-index: -1; transition: opacity 0.3s ease; }
-        .quick-select-btn:hover { transform: scale(1.1); }
-        .quick-select-btn:hover::before { opacity: 1; }
-        .quick-select-btn.plus { background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan)); }
-        .quick-select-btn.ultra { background: linear-gradient(90deg, var(--neon-pink), #c51162); }
+        .quick-select-btn.plus .quick-select-thumb {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
+            box-shadow: 0 0 8px rgba(44, 114, 255, 0.7), 0 3px 8px rgba(0,0,0,0.5);
+        }
+        
+        .quick-select-btn.ultra .quick-select-thumb {
+            background: linear-gradient(135deg, var(--neon-pink), #c51162);
+            box-shadow: 0 0 8px rgba(255, 64, 129, 0.7), 0 3px 8px rgba(0,0,0,0.5);
+        }
+
+        .quick-select-btn:hover {
+            border-color: var(--neon-cyan);
+        }
+        .earnings-card.ultra .quick-select-btn:hover {
+             border-color: var(--neon-pink);
+        }
+
+        .quick-select-btn:hover .quick-select-thumb {
+            transform: scale(1.15);
+        }
+
+        .quick-select-btn.plus:hover .quick-select-thumb {
+            box-shadow: 0 0 15px rgba(44, 114, 255, 1), 0 3px 8px rgba(0,0,0,0.5);
+        }
+
+        .quick-select-btn.ultra:hover .quick-select-thumb {
+             box-shadow: 0 0 15px rgba(255, 64, 129, 1), 0 3px 8px rgba(0,0,0,0.5);
+        }
 
 
         /* CAROUSEL STYLES */
@@ -148,7 +194,15 @@
 
             .price-wrapper { gap: 1rem; }
             .quick-select-icon svg { width: 18px; height: 18px; }
-            .quick-select-btn { width: 45px; height: 28px; }
+            .quick-select-btn {
+                width: 52px;
+                height: 28px;
+                padding: 3px;
+            }
+            .quick-select-thumb {
+                width: 22px;
+                height: 22px;
+            }
 
             /* DOTS NAVIGATION */
             .carousel-dots { display: flex; justify-content: center; gap: 12px; margin-top: 1.5rem; }
@@ -190,7 +244,7 @@
                                     <div class="quick-select-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                     </div>
-                                    <button class="quick-select-btn plus" data-package="plus" aria-label="Choose Plus Plan"></button>
+                                    <button class="quick-select-btn plus" data-package="plus" aria-label="Choose Plus Plan"><span class="quick-select-thumb"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -228,7 +282,7 @@
                                     <div class="quick-select-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                                     </div>
-                                    <button class="quick-select-btn ultra" data-package="ultra" aria-label="Choose Ultra Plan"></button>
+                                    <button class="quick-select-btn ultra" data-package="ultra" aria-label="Choose Ultra Plan"><span class="quick-select-thumb"></span></button>
                                 </div>
                             </div>
                         </div>
