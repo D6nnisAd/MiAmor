@@ -69,10 +69,12 @@
         
         /* DESKTOP STYLES */
         .earnings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
-        .earnings-card { background: var(--card-background); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; transition: all 0.3s ease; backdrop-filter: blur(8px); text-align: left; height: 100%;}
+        .earnings-card { position: relative; overflow: hidden; background: var(--card-background); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; transition: all 0.3s ease; backdrop-filter: blur(8px); text-align: left; height: 100%;}
         .earnings-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
         .earnings-card.ultra { border-color: var(--neon-pink); box-shadow: 0 0 40px rgba(255, 64, 129, 0.2); }
-        .earnings-card .plan-name { font-size: 2rem; font-weight: 700; color: var(--text-light); text-align: center; margin-bottom: 2rem; }
+        .plan-header { text-align: center; margin-bottom: 2rem; }
+        .popular-badge { display: inline-block; background: linear-gradient(90deg, var(--neon-pink), #c51162); color: var(--text-light); padding: 5px 15px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; }
+        .earnings-card .plan-name { font-size: 2rem; font-weight: 700; color: var(--text-light); margin: 0;}
         .earnings-card.ultra .plan-name { color: var(--neon-pink); }
         .earnings-card .access-fee { text-align: center; margin-bottom: 2.5rem; }
         .access-fee .label { font-size: 1rem; color: var(--text-muted); }
@@ -90,9 +92,44 @@
         .earnings-card.ultra .deployed-features li::before { color: var(--neon-pink); }
         .earnings-card .btn { margin-top: auto; width: 100%; }
 
+        .corner-tag {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .corner-tag span {
+            position: absolute;
+            display: block;
+            width: 170px;
+            padding: 8px 0;
+            background-color: var(--neon-pink);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1px;
+            transform: rotate(45deg) translateY(-20px);
+            animation: glow 2s infinite ease-in-out;
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px var(--neon-pink); }
+            50% { box-shadow: 0 0 25px var(--neon-pink); }
+        }
+
+
         /* CAROUSEL STYLES */
-        .plan-carousel-wrapper { display: block; }
+        .plan-carousel-wrapper { position: relative; display: block; }
         .carousel-dots { display: none; } /* Hidden on desktop */
+        .carousel-arrow { display: none; } /* Hidden on desktop */
 
         @media (max-width: 800px) {
             body { padding-top: 2rem; padding-bottom: 2rem; }
@@ -134,7 +171,9 @@
             }
 
             /* FONT & SPACING REDUCTIONS FOR MOBILE */
-            .earnings-card .plan-name { font-size: 1.5rem; margin-bottom: 1rem; }
+            .plan-header { margin-bottom: 1rem; }
+            .popular-badge { font-size: 0.65rem; padding: 4px 12px; margin-bottom: 0.5rem; }
+            .earnings-card .plan-name { font-size: 1.5rem; }
             .earnings-card .access-fee { margin-bottom: 1rem; }
             .access-fee .price { font-size: 2.2rem; }
             .earnings-breakdown { gap: 0.5rem; margin-bottom: 1rem; }
@@ -166,6 +205,32 @@
                 background-color: var(--neon-pink);
                 transform: scale(1.2);
             }
+
+            /* ARROW NAVIGATION */
+            .carousel-arrow {
+                display: block;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 10;
+                background: rgba(10, 25, 47, 0.5);
+                border: 1px solid var(--border-color);
+                border-radius: 50%;
+                width: 44px;
+                height: 44px;
+                cursor: pointer;
+                display: grid;
+                place-items: center;
+                color: var(--text-light);
+                backdrop-filter: blur(5px);
+                transition: all 0.2s ease;
+            }
+            .carousel-arrow:hover {
+                background: rgba(0, 242, 254, 0.2);
+                border-color: var(--neon-cyan);
+            }
+            .carousel-arrow.prev { left: 5vw; }
+            .carousel-arrow.next { right: 5vw; }
         }
     </style>
 </head>
@@ -177,11 +242,17 @@
         <p>Select a package to complete your registration and unlock your earning potential.</p>
 
         <div class="plan-carousel-wrapper">
+            <button class="carousel-arrow prev" id="prev-btn" aria-label="Previous Plan">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+
             <div class="earnings-grid" id="plan-carousel-track">
                 <!-- MiAmor Plus Card -->
                 <div class="earnings-card-wrapper">
                     <div class="earnings-card">
-                        <h3 class="plan-name">MiAmor Plus</h3>
+                        <div class="plan-header">
+                           <h3 class="plan-name">MiAmor Plus</h3>
+                        </div>
                         <div class="access-fee">
                             <div class="label">Access Fee</div>
                             <div class="price">10,000</div>
@@ -207,7 +278,11 @@
                 <!-- MiAmor Ultra Card -->
                 <div class="earnings-card-wrapper">
                     <div class="earnings-card ultra">
-                        <h3 class="plan-name">MiAmor Ultra</h3>
+                        <div class="corner-tag"><span>HOT</span></div>
+                        <div class="plan-header">
+                            <div class="popular-badge">MOST POPULAR</div>
+                            <h3 class="plan-name">MiAmor Ultra</h3>
+                        </div>
                         <div class="access-fee">
                             <div class="label">Access Fee</div>
                             <div class="price">14,000</div>
@@ -231,6 +306,10 @@
                     </div>
                 </div>
             </div>
+
+            <button class="carousel-arrow next" id="next-btn" aria-label="Next Plan">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
         </div>
         <div class="carousel-dots" id="carousel-dots"></div>
 
@@ -269,6 +348,9 @@
             let currentIndex = 0;
 
             if (window.innerWidth <= 800) {
+                const prevBtn = document.getElementById('prev-btn');
+                const nextBtn = document.getElementById('next-btn');
+
                 // Create dots
                 for (let i = 0; i < totalSlides; i++) {
                     const dot = document.createElement('div');
@@ -283,11 +365,6 @@
 
                 // Function to update dots based on scroll
                 const updateDots = () => {
-                    const scrollLeft = track.scrollLeft;
-                    const trackWidth = track.scrollWidth - track.clientWidth;
-                    const slideWidth = track.clientWidth * 0.8; // card is 80vw
-
-                    // A more robust way to find the current index with scroll snapping
                     let closestIndex = 0;
                     let smallestDistance = Infinity;
                     slides.forEach((slide, index) => {
@@ -307,7 +384,6 @@
                     }
                 };
                 
-                // Use a timeout to avoid spamming the event during scroll
                 let scrollTimeout;
                 track.addEventListener('scroll', () => {
                     clearTimeout(scrollTimeout);
@@ -321,9 +397,17 @@
                         const viewportWidth = track.clientWidth;
                         const cardWidth = firstCard.offsetWidth;
                         const gap = parseInt(window.getComputedStyle(track).gap) || 16;
-                        // Scroll to a point between the center of the viewport and the start of the second card
                         track.scrollLeft = (cardWidth + gap / 2) - (viewportWidth / 2);
                     }
+                });
+
+                // Arrow click handlers
+                prevBtn.addEventListener('click', () => {
+                    slides[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    slides[1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 });
             }
         });
