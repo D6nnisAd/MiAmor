@@ -175,6 +175,35 @@
                 box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
             }
         }
+        
+        /* --- NEW: SUPPORT CONTACT SECTION --- */
+        .support-contact {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .support-contact p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .support-contact a {
+            color: var(--neon-cyan);
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 4px;
+            transition: all 0.3s ease;
+        }
+        .support-contact a:hover {
+            color: var(--text-light);
+            text-decoration-style: solid;
+            text-shadow: 0 0 8px var(--neon-cyan);
+        }
+
 
         @media (max-width: 800px) {
             body { padding-top: 2rem; padding-bottom: 2rem; }
@@ -226,6 +255,15 @@
             .carousel-arrow:hover { background: rgba(0, 242, 254, 0.2); border-color: var(--neon-cyan); animation-play-state: paused; /* NEW: Pause animation on hover */ }
             .carousel-arrow.prev { left: 5vw; }
             .carousel-arrow.next { right: 5vw; animation-delay: 1.25s; /* NEW: Delay animation for alternating pulse */ }
+            
+            /* Support Section Mobile Styles */
+            .support-contact {
+                margin-top: 2.5rem;
+                padding-top: 1.5rem;
+            }
+            .support-contact p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -238,7 +276,7 @@
 
         <div class="plan-carousel-wrapper">
             <button class="carousel-arrow prev" id="prev-btn" aria-label="Previous Plan">
-                <svg xmlns="http://www.w.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </button>
 
             <!-- ORDER CHANGED: Ultra is now first -->
@@ -324,6 +362,17 @@
             </button>
         </div>
         <div class="carousel-dots" id="carousel-dots"></div>
+
+        <!-- NEW: SUPPORT CONTACT SECTION -->
+        <div class="support-contact">
+            <p>
+                If you need more explanation on MiAmor, or you have any issue with making a payment, 
+                <a href="https://wa.me/2349133613780?text=Hello+I+want+to+Pay+for+MiAmor+Coupon+Code+to+complete+my+registration" target="_blank" rel="noopener noreferrer">
+                    click here to contact our Support Team.
+                </a>
+            </p>
+        </div>
+        <!-- END SUPPORT CONTACT SECTION -->
 
     </div>
 
