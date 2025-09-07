@@ -72,11 +72,11 @@
         .earnings-card { position: relative; overflow: hidden; background: var(--card-background); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; transition: all 0.3s ease; backdrop-filter: blur(8px); text-align: left; height: 100%;}
         .earnings-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
         .earnings-card.ultra { border-color: var(--neon-pink); box-shadow: 0 0 40px rgba(255, 64, 129, 0.2); }
-        .plan-header { text-align: center; margin-bottom: 2rem; }
+        .plan-header { text-align: center; margin-bottom: 1.5rem; }
         .popular-badge { display: inline-block; background: linear-gradient(90deg, var(--neon-pink), #c51162); color: var(--text-light); padding: 5px 15px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; }
         .earnings-card .plan-name { font-size: 2rem; font-weight: 700; color: var(--text-light); margin: 0;}
         .earnings-card.ultra .plan-name { color: var(--neon-pink); }
-        .earnings-card .access-fee { text-align: center; margin-bottom: 2.5rem; }
+        .earnings-card .access-fee { text-align: center; margin-bottom: 2rem; }
         .access-fee .label { font-size: 1rem; color: var(--text-muted); }
         .access-fee .price { font-size: 3rem; font-weight: 800; line-height: 1; }
         .earnings-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
@@ -92,38 +92,25 @@
         .earnings-card.ultra .deployed-features li::before { color: var(--neon-pink); }
         .earnings-card .btn { margin-top: auto; width: 100%; }
 
-        .corner-tag {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 120px;
-            height: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        .corner-tag span {
-            position: absolute;
-            display: block;
-            width: 170px;
-            padding: 8px 0;
-            background-color: var(--neon-pink);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 1px;
-            transform: rotate(45deg) translateY(-20px);
-            animation: glow 2s infinite ease-in-out;
-        }
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 10px var(--neon-pink); }
-            50% { box-shadow: 0 0 25px var(--neon-pink); }
-        }
+        .corner-tag { position: absolute; top: -4px; right: -4px; width: 120px; height: 120px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .corner-tag span { position: absolute; display: block; width: 170px; padding: 8px 0; background-color: var(--neon-pink); box-shadow: 0 5px 10px rgba(0,0,0,0.2); color: #fff; font-size: 0.9rem; font-weight: 700; text-shadow: 0 1px 1px rgba(0,0,0,0.3); text-transform: uppercase; text-align: center; letter-spacing: 1px; transform: rotate(45deg) translateY(-20px); animation: glow 2s infinite ease-in-out; }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 10px var(--neon-pink); } 50% { box-shadow: 0 0 25px var(--neon-pink); } }
+
+        /* === NEW QUICK SELECT BUTTON STYLES === */
+        .price-wrapper { display: flex; justify-content: center; align-items: center; gap: 1.5rem; }
+        .quick-select-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; }
+        .quick-select-icon { position: absolute; bottom: 100%; margin-bottom: 8px; animation: bounce-icon 1.5s infinite ease-in-out; pointer-events: none; }
+        .quick-select-icon svg { width: 20px; height: 20px; color: var(--neon-cyan); filter: drop-shadow(0 0 5px var(--neon-cyan)); transform: rotate(90deg); }
+        .earnings-card.ultra .quick-select-icon svg { color: var(--neon-pink); filter: drop-shadow(0 0 5px var(--neon-pink)); }
+
+        @keyframes bounce-icon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        .quick-select-btn { width: 50px; height: 30px; border-radius: 50px; border: none; cursor: pointer; transition: all 0.3s ease; position: relative; z-index: 1; }
+        .quick-select-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: inherit; border-radius: 50px; filter: blur(10px); opacity: 0.7; z-index: -1; transition: opacity 0.3s ease; }
+        .quick-select-btn:hover { transform: scale(1.1); }
+        .quick-select-btn:hover::before { opacity: 1; }
+        .quick-select-btn.plus { background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan)); }
+        .quick-select-btn.ultra { background: linear-gradient(90deg, var(--neon-pink), #c51162); }
 
 
         /* CAROUSEL STYLES */
@@ -134,41 +121,14 @@
         @media (max-width: 800px) {
             body { padding-top: 2rem; padding-bottom: 2rem; }
             .plan-container > p { margin-bottom: 2rem; }
-            
-            .plan-carousel-wrapper {
-                width: 100vw;
-                position: relative;
-                left: 50%;
-                transform: translateX(-50%);
-            }
+            .plan-carousel-wrapper { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); }
 
-            .earnings-grid {
-                grid-template-columns: none; /* remove grid layout */
-                display: flex;
-                gap: 1rem;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                padding: 0 calc(50vw - 40vw); /* Centers the card (50vw) minus half the card width (80vw / 2) */
-                -ms-overflow-style: none;  /* IE and Edge */
-                scrollbar-width: none;  /* Firefox */
-            }
-            .earnings-grid::-webkit-scrollbar {
-                display: none; /* Chrome, Safari, and Opera */
-            }
-
-            .earnings-card-wrapper {
-                flex: 0 0 80vw;
-                scroll-snap-align: center;
-                scroll-snap-stop: always;
-            }
+            .earnings-grid { grid-template-columns: none; display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 calc(50vw - 40vw); -ms-overflow-style: none; scrollbar-width: none; }
+            .earnings-grid::-webkit-scrollbar { display: none; }
+            .earnings-card-wrapper { flex: 0 0 80vw; scroll-snap-align: center; scroll-snap-stop: always; }
             
-            .earnings-card {
-                padding: 1.5rem;
-                box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            }
-            .earnings-card:hover {
-                transform: none; /* Disable hover effect on mobile */
-            }
+            .earnings-card { padding: 1.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+            .earnings-card:hover { transform: none; }
 
             /* FONT & SPACING REDUCTIONS FOR MOBILE */
             .plan-header { margin-bottom: 1rem; }
@@ -186,49 +146,18 @@
             .deployed-features li { font-size: 0.8rem; margin-bottom: 0.25rem; }
             .earnings-card .btn { padding: 12px 30px; font-size: 0.9rem; }
 
+            .price-wrapper { gap: 1rem; }
+            .quick-select-icon svg { width: 18px; height: 18px; }
+            .quick-select-btn { width: 45px; height: 28px; }
+
             /* DOTS NAVIGATION */
-            .carousel-dots {
-                display: flex;
-                justify-content: center;
-                gap: 12px;
-                margin-top: 1.5rem;
-            }
-            .dot {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background-color: var(--border-color);
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-            .dot.active {
-                background-color: var(--neon-pink);
-                transform: scale(1.2);
-            }
+            .carousel-dots { display: flex; justify-content: center; gap: 12px; margin-top: 1.5rem; }
+            .dot { width: 10px; height: 10px; border-radius: 50%; background-color: var(--border-color); cursor: pointer; transition: all 0.3s ease; }
+            .dot.active { background-color: var(--neon-pink); transform: scale(1.2); }
 
             /* ARROW NAVIGATION */
-            .carousel-arrow {
-                display: block;
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                z-index: 10;
-                background: rgba(10, 25, 47, 0.5);
-                border: 1px solid var(--border-color);
-                border-radius: 50%;
-                width: 44px;
-                height: 44px;
-                cursor: pointer;
-                display: grid;
-                place-items: center;
-                color: var(--text-light);
-                backdrop-filter: blur(5px);
-                transition: all 0.2s ease;
-            }
-            .carousel-arrow:hover {
-                background: rgba(0, 242, 254, 0.2);
-                border-color: var(--neon-cyan);
-            }
+            .carousel-arrow { display: block; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(10, 25, 47, 0.5); border: 1px solid var(--border-color); border-radius: 50%; width: 44px; height: 44px; cursor: pointer; display: grid; place-items: center; color: var(--text-light); backdrop-filter: blur(5px); transition: all 0.2s ease; }
+            .carousel-arrow:hover { background: rgba(0, 242, 254, 0.2); border-color: var(--neon-cyan); }
             .carousel-arrow.prev { left: 5vw; }
             .carousel-arrow.next { right: 5vw; }
         }
@@ -255,7 +184,15 @@
                         </div>
                         <div class="access-fee">
                             <div class="label">Access Fee</div>
-                            <div class="price">10,000</div>
+                             <div class="price-wrapper">
+                                <div class="price">10,000</div>
+                                <div class="quick-select-wrapper">
+                                    <div class="quick-select-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
+                                    <button class="quick-select-btn plus" data-package="plus" aria-label="Choose Plus Plan"></button>
+                                </div>
+                            </div>
                         </div>
                         <div class="earnings-breakdown">
                             <div class="earning-item"><div class="label">Onboarding Gift</div><div class="value">8,000</div></div>
@@ -285,7 +222,15 @@
                         </div>
                         <div class="access-fee">
                             <div class="label">Access Fee</div>
-                            <div class="price">14,000</div>
+                            <div class="price-wrapper">
+                                <div class="price">14,000</div>
+                                <div class="quick-select-wrapper">
+                                    <div class="quick-select-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
+                                    <button class="quick-select-btn ultra" data-package="ultra" aria-label="Choose Ultra Plan"></button>
+                                </div>
+                            </div>
                         </div>
                         <div class="earnings-breakdown">
                             <div class="earning-item"><div class="label">Onboarding Gift</div><div class="value">12,500</div></div>
@@ -308,7 +253,7 @@
             </div>
 
             <button class="carousel-arrow next" id="next-btn" aria-label="Next Plan">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
             </button>
         </div>
         <div class="carousel-dots" id="carousel-dots"></div>
@@ -319,6 +264,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const email = urlParams.get('email');
+
+            // Auto-scroll to plans section on load
+            const plansSection = document.getElementById('plan-carousel-track');
+            if (plansSection) {
+                setTimeout(() => {
+                    plansSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 250);
+            }
 
             if (!email) {
                 const container = document.querySelector('.plan-container');
@@ -332,12 +285,14 @@
 
             const encodedEmail = encodeURIComponent(email);
 
-            document.querySelector('button[data-package="plus"]').addEventListener('click', () => {
-                window.location.href = `payment.html?package=plus&email=${encodedEmail}`;
-            });
-
-            document.querySelector('button[data-package="ultra"]').addEventListener('click', () => {
-                window.location.href = `payment.html?package=ultra&email=${encodedEmail}`;
+            // Universal handler for all choice buttons
+            document.querySelectorAll('button[data-package]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const packageType = button.dataset.package;
+                    if (packageType) {
+                        window.location.href = `payment.html?package=${packageType}&email=${encodedEmail}`;
+                    }
+                });
             });
 
             // --- Carousel Logic for Mobile ---
