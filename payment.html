@@ -69,25 +69,36 @@
         
         .header-note { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
 
-        /* --- NEW: OPay Warning Note --- */
+        /* --- UPDATED: OPay Warning Note --- */
+        @keyframes pulse-warning {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 64, 129, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(255, 64, 129, 0.5); }
+        }
         .warning-note {
             background-color: rgba(255, 64, 129, 0.1);
-            border: 1px solid rgba(255, 64, 129, 0.3);
+            border: 1px solid rgba(255, 64, 129, 0.4);
             border-radius: 8px;
-            padding: 0.75rem 1rem;
+            padding: 1rem;
             margin: -0.5rem 0 1.5rem 0;
             color: #f8d7da;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             text-align: left;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.75rem;
+            line-height: 1.6;
+            animation: pulse-warning 3s infinite ease-in-out; /* NEW: Added animation */
         }
         .warning-note svg {
             flex-shrink: 0;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
             color: var(--neon-pink);
+        }
+        .warning-note b {
+            text-transform: uppercase;
+            color: white;
         }
 
         .summary-box, .payment-details-box { background: var(--background-dark); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; text-align: left; margin-bottom: 1.5rem; }
@@ -112,6 +123,17 @@
         .timer-text { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
         #countdown-timer { font-weight: 600; font-size: 1rem; color: var(--neon-cyan); margin-left: 5px; }
         
+        /* NEW: Post-payment instruction */
+        .post-payment-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
         .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 15px 40px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer; font-size: 1.1rem; }
         .btn-primary { background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan)); color: var(--text-light); }
         .btn:disabled { opacity: 0.7; cursor: not-allowed; }
@@ -119,7 +141,6 @@
         .loader { width: 18px; height: 18px; border: 2px solid #FFF; border-bottom-color: transparent; border-radius: 50%; display: inline-block; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* --- NEW: SUPPORT CONTACT SECTION --- */
         .support-contact {
             margin-top: 2rem;
             text-align: center;
@@ -127,24 +148,9 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .support-contact p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-        .support-contact a {
-            color: var(--neon-cyan);
-            font-weight: 600;
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            text-underline-offset: 4px;
-            transition: all 0.3s ease;
-        }
-        .support-contact a:hover {
-            color: var(--text-light);
-            text-decoration-style: solid;
-            text-shadow: 0 0 8px var(--neon-cyan);
-        }
+        .support-contact p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+        .support-contact a { color: var(--neon-cyan); font-weight: 600; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 4px; transition: all 0.3s ease; }
+        .support-contact a:hover { color: var(--text-light); text-decoration-style: solid; text-shadow: 0 0 8px var(--neon-cyan); }
 
         @media (max-width: 600px) {
             body { padding: 1rem 0.5rem; align-items: flex-start; min-height: 100%; }
@@ -154,7 +160,7 @@
             .gateway-label { font-size: 0.8rem; margin-bottom: 1rem; }
             h2 { font-size: 1.5rem; }
             .header-note { margin-bottom: 1rem; font-size: 0.9rem; }
-            .warning-note { font-size: 0.85rem; padding: 0.6rem 0.8rem; }
+            .warning-note { font-size: 0.9rem; padding: 0.8rem; }
             .summary-box, .payment-details-box, .timer-text { margin-bottom: 1rem; }
             .summary-box, .payment-details-box { padding: 1rem; }
             .summary-row { font-size: 0.9rem; margin-bottom: 0.75rem; }
@@ -177,10 +183,10 @@
             <h2>Complete Your Payment</h2>
             <p class="header-note">Your account will be activated once payment is confirmed.</p>
             
-            <!-- NEW: OPay Warning Note -->
+            <!-- UPDATED: OPay Warning Note -->
             <div class="warning-note">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                <span><b>Important:</b> Payments from OPay / Paycom bank accounts are not accepted.</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                <span><b>Note: DO NOT PAY WITH OPAY (Paycom).</b> It is not accepted on MiAmor. Please use any other bank or POS to pay.</span>
             </div>
 
             <div class="summary-box">
@@ -219,13 +225,13 @@
             
             <p class="timer-text">Account will expire in <span id="countdown-timer">30:00</span></p>
 
-            <!-- MODIFIED: Form no longer contains bank selection -->
             <form id="payment-confirmation-form">
+                <!-- NEW: Post-payment instruction -->
+                <p class="post-payment-note">After making payment, please contact support with your payment receipt.</p>
                 <button type="submit" class="btn btn-primary">I have made payment</button>
             </form>
         </div>
         
-        <!-- NEW: SUPPORT CONTACT SECTION -->
         <div class="support-contact">
             <p>
                 If you need more explanation on MiAmor, or you have any issue with making a payment, 
@@ -234,7 +240,6 @@
                 </a>
             </p>
         </div>
-        <!-- END SUPPORT CONTACT SECTION -->
 
     </div>
 
@@ -245,8 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'plus': { name: 'MiAmor Plus', price: '₦10,000' },
         'ultra': { name: 'MiAmor Ultra', price: '₦14,000' }
     };
-
-    // REMOVED: Nigerian banks list is gone
 
     const gateway = document.getElementById('payment-gateway');
     const urlParams = new URLSearchParams(window.location.search);
@@ -281,14 +284,11 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', (e) => { e.preventDefault(); const targetId = button.dataset.copyTarget; const textToCopy = document.getElementById(targetId).textContent; navigator.clipboard.writeText(textToCopy).then(() => { button.textContent = 'Copied!'; setTimeout(() => { button.textContent = 'Copy'; }, 2000); }); });
     });
 
-    // REMOVED: All bank selection dropdown logic has been removed.
 });
 </script>
 
 
-<!-- ===================================================================== -->
-<!-- =================== NEW FIREBASE SCRIPT BLOCK ======================= -->
-<!-- ===================================================================== -->
+<!-- =================== FIREBASE SCRIPT BLOCK ======================= -->
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -316,18 +316,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (snapshot.exists()) {
             const data = snapshot.val();
             
-            // Update the visible details on the page
             document.getElementById('account-number').textContent = data.account_number;
             document.getElementById('bank-name').value = data.bank_name;
             document.getElementById('account-name').value = data.account_name;
 
-            // Form submission logic
             const confirmationForm = document.getElementById('payment-confirmation-form');
             if (confirmationForm) {
                 confirmationForm.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    
-                    // REMOVED: The check for selectedBank is no longer needed.
                     
                     const submitButton = confirmationForm.querySelector('button[type="submit"]');
                     submitButton.disabled = true;
