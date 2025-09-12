@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose Your Plan | MiAmor</title>
+    <!-- MODIFICATION: Changed title for pre-launch context -->
+    <title>Book Your Founder's Slot | MiAmor</title>
 
     <!-- FAVICON LINKS -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -69,7 +70,7 @@
         
         /* DESKTOP STYLES */
         .earnings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
-        .earnings-card { position: relative; overflow: hidden; background: var(--card-background); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; transition: all 0.3s ease; backdrop-filter: blur(8px); text-align: left; height: 100%; cursor: pointer; /* NEW: Added cursor pointer */ }
+        .earnings-card { position: relative; overflow: hidden; background: var(--card-background); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; transition: all 0.3s ease; backdrop-filter: blur(8px); text-align: left; height: 100%;}
         .earnings-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
         .earnings-card.ultra { border-color: var(--neon-pink); box-shadow: 0 0 40px rgba(255, 64, 129, 0.2); }
         .plan-header { text-align: center; margin-bottom: 1.5rem; }
@@ -164,47 +165,6 @@
         .carousel-dots { display: none; } /* Hidden on desktop */
         .carousel-arrow { display: none; } /* Hidden on desktop */
 
-        /* NEW: Arrow animation */
-        @keyframes pulse-arrow {
-            0%, 100% {
-                transform: translateY(-50%) scale(1);
-                box-shadow: 0 0 8px rgba(0, 242, 254, 0);
-            }
-            50% {
-                transform: translateY(-50%) scale(1.1);
-                box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
-            }
-        }
-        
-        /* --- NEW: SUPPORT CONTACT SECTION --- */
-        .support-contact {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .support-contact p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-        .support-contact a {
-            color: var(--neon-cyan);
-            font-weight: 600;
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            text-underline-offset: 4px;
-            transition: all 0.3s ease;
-        }
-        .support-contact a:hover {
-            color: var(--text-light);
-            text-decoration-style: solid;
-            text-shadow: 0 0 8px var(--neon-cyan);
-        }
-
-
         @media (max-width: 800px) {
             body { padding-top: 2rem; padding-bottom: 2rem; }
             .plan-container > p { margin-bottom: 2rem; }
@@ -251,19 +211,10 @@
             .dot.active { background-color: var(--neon-pink); transform: scale(1.2); }
 
             /* ARROW NAVIGATION */
-            .carousel-arrow { display: block; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(10, 25, 47, 0.5); border: 1px solid var(--border-color); border-radius: 50%; width: 44px; height: 44px; cursor: pointer; display: grid; place-items: center; color: var(--text-light); backdrop-filter: blur(5px); transition: all 0.2s ease; animation: pulse-arrow 2.5s infinite ease-in-out; /* NEW: Added animation */ }
-            .carousel-arrow:hover { background: rgba(0, 242, 254, 0.2); border-color: var(--neon-cyan); animation-play-state: paused; /* NEW: Pause animation on hover */ }
+            .carousel-arrow { display: block; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(10, 25, 47, 0.5); border: 1px solid var(--border-color); border-radius: 50%; width: 44px; height: 44px; cursor: pointer; display: grid; place-items: center; color: var(--text-light); backdrop-filter: blur(5px); transition: all 0.2s ease; }
+            .carousel-arrow:hover { background: rgba(0, 242, 254, 0.2); border-color: var(--neon-cyan); }
             .carousel-arrow.prev { left: 5vw; }
-            .carousel-arrow.next { right: 5vw; animation-delay: 1.25s; /* NEW: Delay animation for alternating pulse */ }
-            
-            /* Support Section Mobile Styles */
-            .support-contact {
-                margin-top: 2.5rem;
-                padding-top: 1.5rem;
-            }
-            .support-contact p {
-                font-size: 1rem;
-            }
+            .carousel-arrow.next { right: 5vw; }
         }
     </style>
 </head>
@@ -271,54 +222,17 @@
 
     <div class="plan-container">
         <a href="index.html"><img src="assets/logo.png" alt="MiAmor Logo" class="logo"></a>
-        <h2><span class="highlight">Choose Your Plan</span></h2>
-        <p>Select a package to complete your registration and unlock your earning potential.</p>
+        <!-- MODIFICATION: Updated headline for pre-launch context -->
+        <h2><span class="highlight">Book Your Founder's Slot</span></h2>
+        <!-- MODIFICATION: Updated paragraph for pre-launch context -->
+        <p>Select your desired founder's package. This one-time fee secures your slot and all associated benefits when MiAmor officially launches.</p>
 
         <div class="plan-carousel-wrapper">
             <button class="carousel-arrow prev" id="prev-btn" aria-label="Previous Plan">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </button>
 
-            <!-- ORDER CHANGED: Ultra is now first -->
             <div class="earnings-grid" id="plan-carousel-track">
-                <!-- MiAmor Ultra Card -->
-                <div class="earnings-card-wrapper">
-                    <div class="earnings-card ultra">
-                        <div class="corner-tag"><span>HOT</span></div>
-                        <div class="plan-header">
-                            <div class="popular-badge">MOST POPULAR</div>
-                            <h3 class="plan-name">MiAmor Ultra</h3>
-                        </div>
-                        <div class="access-fee">
-                            <div class="label">Access Fee</div>
-                            <div class="price-wrapper">
-                                <div class="price">14,000</div>
-                                <div class="quick-select-wrapper">
-                                    <div class="quick-select-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                    </div>
-                                    <button class="quick-select-btn ultra" data-package="ultra" aria-label="Choose Ultra Plan"><span class="quick-select-thumb"></span></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="earnings-breakdown">
-                            <div class="earning-item"><div class="label">Onboarding Gift</div><div class="value">12,500</div></div>
-                            <div class="earning-item"><div class="label">Connection Commission</div><div class="value">12,500</div></div>
-                            <div class="earning-item"><div class="label">Matching Add-ons</div><div class="value">2,500</div></div>
-                            <div class="earning-item"><div class="label">Game Modules</div><div class="value">5,000</div></div>
-                            <div class="earning-item"><div class="label">First Level Spill</div><div class="value">400</div></div>
-                            <div class="earning-item"><div class="label">Second Level Spill</div><div class="value">150</div></div>
-                            <div class="earning-item" style="grid-column: 1 / -1;"><div class="label">TikTok/FB Share</div><div class="value">2,500 <small>/ 5k views</small></div></div>
-                        </div>
-                        <div class="deployed-features">
-                            <h4>Core Features Included</h4>
-                            <ul>
-                                <li>Incentives</li><li>Couples Challenge</li><li>Skills Lab</li><li>Love Hamper</li><li>Sell It Sector</li><li>Marathon Contest</li><li>Couples Trip</li>
-                            </ul>
-                        </div>
-                        <button class="btn btn-accent" data-package="ultra">Choose Ultra</button>
-                    </div>
-                </div>
                 <!-- MiAmor Plus Card -->
                 <div class="earnings-card-wrapper">
                     <div class="earnings-card">
@@ -326,7 +240,8 @@
                            <h3 class="plan-name">MiAmor Plus</h3>
                         </div>
                         <div class="access-fee">
-                            <div class="label">Access Fee</div>
+                            <!-- MODIFICATION: Changed "Access Fee" to "Slot Booking Fee" -->
+                            <div class="label">Slot Booking Fee</div>
                              <div class="price-wrapper">
                                 <div class="price">10,000</div>
                                 <div class="quick-select-wrapper">
@@ -352,7 +267,48 @@
                                 <li>Incentives</li><li>Couples Challenge</li><li>Skills Lab</li><li>Love Hamper</li><li>Sell It Sector</li><li>Marathon Contest</li><li>Couples Trip</li>
                             </ul>
                         </div>
-                        <button class="btn btn-primary" data-package="plus">Choose Plus</button>
+                        <!-- MODIFICATION: Changed button text for pre-launch context -->
+                        <button class="btn btn-primary" data-package="plus">Book Plus Slot</button>
+                    </div>
+                </div>
+                <!-- MiAmor Ultra Card -->
+                <div class="earnings-card-wrapper">
+                    <div class="earnings-card ultra">
+                        <div class="corner-tag"><span>HOT</span></div>
+                        <div class="plan-header">
+                            <div class="popular-badge">MOST POPULAR</div>
+                            <h3 class="plan-name">MiAmor Ultra</h3>
+                        </div>
+                        <div class="access-fee">
+                            <!-- MODIFICATION: Changed "Access Fee" to "Slot Booking Fee" -->
+                            <div class="label">Slot Booking Fee</div>
+                            <div class="price-wrapper">
+                                <div class="price">14,000</div>
+                                <div class="quick-select-wrapper">
+                                    <div class="quick-select-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                    </div>
+                                    <button class="quick-select-btn ultra" data-package="ultra" aria-label="Choose Ultra Plan"><span class="quick-select-thumb"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="earnings-breakdown">
+                            <div class="earning-item"><div class="label">Onboarding Gift</div><div class="value">12,500</div></div>
+                            <div class="earning-item"><div class="label">Connection Commission</div><div class="value">12,500</div></div>
+                            <div class="earning-item"><div class="label">Matching Add-ons</div><div class="value">2,500</div></div>
+                            <div class="earning-item"><div class="label">Game Modules</div><div class="value">5,000</div></div>
+                            <div class="earning-item"><div class="label">First Level Spill</div><div class="value">400</div></div>
+                            <div class="earning-item"><div class="label">Second Level Spill</div><div class="value">150</div></div>
+                            <div class="earning-item" style="grid-column: 1 / -1;"><div class="label">TikTok/FB Share</div><div class="value">2,500 <small>/ 5k views</small></div></div>
+                        </div>
+                        <div class="deployed-features">
+                            <h4>Core Features Included</h4>
+                            <ul>
+                                <li>Incentives</li><li>Couples Challenge</li><li>Skills Lab</li><li>Love Hamper</li><li>Sell It Sector</li><li>Marathon Contest</li><li>Couples Trip</li>
+                            </ul>
+                        </div>
+                        <!-- MODIFICATION: Changed button text for pre-launch context -->
+                        <button class="btn btn-accent" data-package="ultra">Book Ultra Slot</button>
                     </div>
                 </div>
             </div>
@@ -363,23 +319,20 @@
         </div>
         <div class="carousel-dots" id="carousel-dots"></div>
 
-        <!-- NEW: SUPPORT CONTACT SECTION -->
-        <div class="support-contact">
-            <p>
-                If you need more explanation on MiAmor, or you have any issue with making a payment, 
-                <a href="https://wa.me/2349133613780?text=Hello+I+want+to+Pay+for+MiAmor+Coupon+Code+to+complete+my+registration" target="_blank" rel="noopener noreferrer">
-                    click here to contact our Support Team.
-                </a>
-            </p>
-        </div>
-        <!-- END SUPPORT CONTACT SECTION -->
-
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const email = urlParams.get('email');
+
+            // Auto-scroll to plans section on load
+            const plansSection = document.getElementById('plan-carousel-track');
+            if (plansSection) {
+                setTimeout(() => {
+                    plansSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 250);
+            }
 
             if (!email) {
                 const container = document.querySelector('.plan-container');
@@ -393,35 +346,15 @@
 
             const encodedEmail = encodeURIComponent(email);
 
-            // Function to handle navigation
-            const choosePlan = (packageType) => {
-                if (packageType) {
-                    window.location.href = `payment.html?package=${packageType}&email=${encodedEmail}`;
-                }
-            };
-
-            // Handler for all choice buttons
+            // Universal handler for all choice buttons
             document.querySelectorAll('button[data-package]').forEach(button => {
                 button.addEventListener('click', () => {
-                    choosePlan(button.dataset.package);
+                    const packageType = button.dataset.package;
+                    if (packageType) {
+                        window.location.href = `payment.html?package=${packageType}&email=${encodedEmail}`;
+                    }
                 });
             });
-
-            // NEW: Make entire cards clickable
-            document.querySelectorAll('.earnings-card').forEach(card => {
-                // Find the package type from the button inside the card
-                const packageType = card.querySelector('button[data-package]').dataset.package;
-                if (packageType) {
-                    card.addEventListener('click', (e) => {
-                        // Only navigate if the click is not on an interactive element like a button
-                        if (e.target.closest('button')) {
-                            return;
-                        }
-                        choosePlan(packageType);
-                    });
-                }
-            });
-
 
             // --- Carousel Logic for Mobile ---
             const track = document.getElementById('plan-carousel-track');
@@ -430,12 +363,12 @@
             const totalSlides = slides.length;
             let currentIndex = 0;
 
-            if (window.innerWidth <= 800 && slides.length > 1) {
+            if (window.innerWidth <= 800) {
                 const prevBtn = document.getElementById('prev-btn');
                 const nextBtn = document.getElementById('next-btn');
 
                 // Create dots
-                slides.forEach((_, i) => {
+                for (let i = 0; i < totalSlides; i++) {
                     const dot = document.createElement('div');
                     dot.classList.add('dot');
                     if (i === 0) dot.classList.add('active');
@@ -443,18 +376,17 @@
                         slides[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                     });
                     dotsContainer.appendChild(dot);
-                });
+                }
                 const dots = Array.from(dotsContainer.children);
 
                 // Function to update dots based on scroll
-                const updateUiBasedOnScroll = () => {
+                const updateDots = () => {
                     let closestIndex = 0;
                     let smallestDistance = Infinity;
-                    const trackCenter = track.scrollLeft + track.clientWidth / 2;
-
                     slides.forEach((slide, index) => {
                         const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-                        const distance = Math.abs(slideCenter - trackCenter);
+                        const scrollCenter = track.scrollLeft + track.clientWidth / 2;
+                        const distance = Math.abs(slideCenter - scrollCenter);
                         if (distance < smallestDistance) {
                             smallestDistance = distance;
                             closestIndex = index;
@@ -471,22 +403,28 @@
                 let scrollTimeout;
                 track.addEventListener('scroll', () => {
                     clearTimeout(scrollTimeout);
-                    scrollTimeout = setTimeout(updateUiBasedOnScroll, 100);
-                }, { passive: true });
+                    scrollTimeout = setTimeout(updateDots, 100);
+                });
+
+                // Set initial "peek-a-boo" scroll position
+                requestAnimationFrame(() => {
+                    const firstCard = slides[0];
+                    if (firstCard) {
+                        const viewportWidth = track.clientWidth;
+                        const cardWidth = firstCard.offsetWidth;
+                        const gap = parseInt(window.getComputedStyle(track).gap) || 16;
+                        track.scrollLeft = (cardWidth + gap / 2) - (viewportWidth / 2);
+                    }
+                });
 
                 // Arrow click handlers
                 prevBtn.addEventListener('click', () => {
-                    const newIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
-                    slides[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    slides[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 });
 
                 nextBtn.addEventListener('click', () => {
-                    const newIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
-                    slides[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    slides[1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 });
-
-                // Set initial state after layout is calculated
-                updateUiBasedOnScroll();
             }
         });
     </script>
